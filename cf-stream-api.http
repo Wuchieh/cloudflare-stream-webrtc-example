@@ -1,4 +1,50 @@
-POST https://api.cloudflare.com/client/v4/accounts/{{CF-ACCOUNT}}/stream/live_inputs
+### List live inputs
+GET https://api.cloudflare.com/client/v4/accounts/{{CF-ACCOUNT}}/stream/live_inputs
 Authorization: Bearer {{CF-TOKEN}}
 
-{"meta": {"name":"test stream"},"recording": { "mode": "automatic" }}
+### Retrieve a live input
+GET https://api.cloudflare.com/client/v4/accounts/{{CF-ACCOUNT}}/stream/live_inputs/$LIVE_INPUT_IDENTIFIER
+Authorization: Bearer {{CF-TOKEN}}
+
+### Create a live input
+POST https://api.cloudflare.com/client/v4/accounts/{{CF-ACCOUNT}}/stream/live_inputs
+Authorization: Bearer {{CF-TOKEN}}
+Content-Type: application/json
+
+{
+  "deleteRecordingAfterDays": 45,
+  "enabled": true,
+  "meta": {
+    "name": "test stream 1"
+  },
+  "recording": {
+    "hideLiveViewerCount": false,
+    "mode": "off",
+    "requireSignedURLs": false,
+    "timeoutSeconds": 0
+  }
+}
+
+
+### Update a live input
+PUT https://api.cloudflare.com/client/v4/accounts/{{CF-ACCOUNT}}/stream/live_inputs/$LIVE_INPUT_IDENTIFIER
+Authorization: Bearer {{CF-TOKEN}}
+Content-Type: application/json
+
+{
+  "deleteRecordingAfterDays": 45,
+  "enabled": true,
+  "meta": {
+    "name": "test stream 1"
+  },
+  "recording": {
+    "hideLiveViewerCount": false,
+    "mode": "off",
+    "requireSignedURLs": false,
+    "timeoutSeconds": 0
+  }
+}
+
+### Delete a live input
+DELETE https://api.cloudflare.com/client/v4/accounts/{{CF-ACCOUNT}}/stream/live_inputs/$LIVE_INPUT_IDENTIFIER
+Authorization: Bearer {{CF-TOKEN}}
