@@ -46,5 +46,13 @@ Content-Type: application/json
 }
 
 ### Delete a live input
-DELETE https://api.cloudflare.com/client/v4/accounts/{{CF-ACCOUNT}}/stream/live_inputs/$LIVE_INPUT_IDENTIFIER
+< {%
+    request.variables.set("clients", [ // test data
+        {LIVE_INPUT_IDENTIFIER:'f9cf138*******************a7a99d'},
+        {LIVE_INPUT_IDENTIFIER:'07964d8*******************f15e3f'},
+        {LIVE_INPUT_IDENTIFIER:'e902cd0*******************ab3a2e'},
+        {LIVE_INPUT_IDENTIFIER:'9851a67*******************da6d41'},
+    ])
+%}
+DELETE https://api.cloudflare.com/client/v4/accounts/{{CF-ACCOUNT}}/stream/live_inputs/{{$.clients..LIVE_INPUT_IDENTIFIER}}
 Authorization: Bearer {{CF-TOKEN}}
